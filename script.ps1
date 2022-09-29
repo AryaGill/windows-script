@@ -9,15 +9,8 @@ $password = Read-Host -AsSecureString
             
 # List of computer admins
 $compAdmin = (Get-LocalGroupMember Administrators).Name -replace ".*\\"
-$compAllUsers = (Get-LocalUser).Name -replace "Administrator" -replace "DefaultAccount" -replace "WDAGUtilityAccount"
-
-# Set Passowrds for all users
-#net user ashepard CyberPatri0ts!
-#net user asteele CyberPatri0ts!
-#net user yafoloyan CyberPatri0ts!
-#net user gmctaggart CyberPatri0ts!
-#net user sprice CyberPatri0ts!
-#net user tviktorov CyberPatri0ts!
+# $compAllUsers = (Get-LocalUser).Name -replace "Administrator" -replace "DefaultAccount" -replace "WDAGUtilityAccount"
+$compAllUsers = (Get-LocalUser).Name 
 
 # Check if all Aprroved users have a account on this system. If not then create a new one. 
 foreach ($i in  $allUsers){
@@ -28,10 +21,13 @@ foreach ($i in  $allUsers){
 }
 # Check if all System users are approved or not. If not then they are deleted. 
 foreach ($i in $compAllUsers){
-    if ($i -notin $allUsers){
+    if ($i -eq "Administrator" -or $i -eq "DefaultAccount" -or $i -eq "Guest" -or $i -eq "WDAGUtilityAccount"){
+        "*** Cannot Delete $i"
+    }
+    elseif ($i -notin $allUsers){
         "!!!! Deleting unapproved user $i"
         $i | Remove-LocalUser
-    }
+        }
 }
 # Checks if the Approved Admins have access to the system. If not then it adds them to the Admin group. 
 Foreach($i in $admins){
