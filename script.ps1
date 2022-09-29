@@ -7,9 +7,8 @@ $users = @("telwes", "rekin", "pqadir", "bwallis", "tmac", "ysommer", "jgust", "
 # Ask the password you want to set for all accounts
 $password = Read-Host -AsSecureString
             
-# List of computer admins
+# List of computer users and Admins
 $compAdmin = (Get-LocalGroupMember Administrators).Name -replace ".*\\"
-# $compAllUsers = (Get-LocalUser).Name -replace "Administrator" -replace "DefaultAccount" -replace "WDAGUtilityAccount"
 $compAllUsers = (Get-LocalUser).Name 
 
 # Check if all Aprroved users have a account on this system. If not then create a new one. 
