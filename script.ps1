@@ -48,3 +48,23 @@ Foreach($i in $compAdmin){
 Foreach ($i in $allUsers){
     $i | Set-LocalUser -Password $password -PasswordNeverExpires $false
 }
+
+# Setting localpolicies-audit policies    
+auditpol /set /category:"Account Logon" /success:disable
+auditpol /set /category:"Account Logon" /failure:enable
+auditpol /set /category:"Account Management" /success:enable
+auditpol /set /category:"Account Management" /failure:disable
+auditpol /set /category:"DS Access" /success:disable
+auditpol /set /category:"DS Access" /failure:disable
+auditpol /set /category:"Logon/Logoff" /success:disable
+auditpol /set /category:"Logon/Logoff" /failure:enable
+auditpol /set /category:"Object Access" /success:disable
+auditpol /set /category:"Object Access" /failure:disable
+auditpol /set /category:"Policy Change" /success:enable
+auditpol /set /category:"Policy Change" /failure:disable
+auditpol /set /category:"Privilege Use" /success:enable
+auditpol /set /category:"Privilege Use" /failure:enable
+auditpol /set /category:"Detailed Tracking" /success:enable
+auditpol /set /category:"Detailed Tracking" /failure:enable
+auditpol /set /category:"System" /success:disable
+auditpol /set /category:"System" /failure:enable
