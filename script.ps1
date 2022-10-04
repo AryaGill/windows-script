@@ -22,6 +22,8 @@ foreach ($i in  $allUsers){
 foreach ($i in $compAllUsers){
     if ($i -eq "Administrator" -or $i -eq "DefaultAccount" -or $i -eq "Guest" -or $i -eq "WDAGUtilityAccount"){
         "*** Cannot Delete $i"
+        "!!! Disabling $i"
+        Disable-LocalUser $i
     }
     elseif ($i -notin $allUsers){
         "!!!! Deleting unapproved user $i"
