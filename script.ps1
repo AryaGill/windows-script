@@ -257,4 +257,4 @@ auditpol /set /category:"System" /failure:enable
     cmd.exe /c 'sc config SCPolicySvc start= auto'
     cmd.exe /c 'sc start wscsvc'
     cmd.exe /c 'sc config wscsvc start= auto'
-}
+    
